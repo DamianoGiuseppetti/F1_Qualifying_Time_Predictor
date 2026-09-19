@@ -1,0 +1,64 @@
+# Phase 4: CI - lint, test, build (Task_List.txt's Phase 4 order).
+#
+# Assumes the DEFAULT BRANCH IS "main" - change the two "main" lines below
+# if the real GitHub repo uses "master" or something else.
+#
+# "build" only confirms `docker build` SUCCEEDS - it does not start the
+# container and hit /health. That's a real, deliberate limitation, not an
+# oversight, though the reason changed at the Phase 6 Sep 19 2026 commit:
+# models/lstm/*.pt and siblings ARE tracked in git now (they were part of
+# the original Aug 25 2026 commit and this one refreshes them), so a
+# fresh CI checkout DOES have a trained model to load. What's still
+# gitignored is data/processed/*.parquet (features.parquet,
+# qualifying_targets.parquet - regenerable via scripts/, never meant to
+# live in git) - /predict needs those, so a full request-level smoke
+# test still isn't possible from a bare checkout, even though a plain
+# /health-after-startup check now plausibly could be. Not added here -
+# flagged as worth revisiting once CI has actually run for real, rather
+# than assumed still blocked for the original reason.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install ruff
+        run: pip install ruff
+      - name: Run ruff
+        run: ruff check .
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        # requirements.txt (the full dev-env file), not just pyproject.toml's
+        # runtime deps - the test suite needs torch/xgboost/shap too (e.g.
+        # test_lstm_model.py, test_interpretability.py).
+        run: pip install -r requirements.txt
+      - name: Install package
+        run: pip install -e .
+      - name: Run tests
+        run: pytest
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]  # don't spend CI minutes building the image if lint/test already failed
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t f1-qualifying-predictor-api:ci .

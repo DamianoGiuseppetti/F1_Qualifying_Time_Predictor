@@ -1,0 +1,605 @@
+{
+  "computed_at_utc": "2026-09-13T11:00:29.993199+00:00",
+  "alphas": {
+    "0.5": {
+      "coverage_target_pct": 50,
+      "era_1": {
+        "pooled_coverage": 0.5070921985815603,
+        "deployment_quantile_seconds": 0.6821421627998348,
+        "deployment_quantile_exact": true,
+        "n_calibration": 282,
+        "per_round": {
+          "1": {
+            "quantile": 0.7036176795959506,
+            "n_calibration": 263,
+            "n_test": 19,
+            "coverage": 0.7368421052631579,
+            "exact": true
+          },
+          "2": {
+            "quantile": 0.6190924482345679,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.045454545454545456,
+            "exact": true
+          },
+          "3": {
+            "quantile": 0.7036176795959506,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6818181818181818,
+            "exact": true
+          },
+          "4": {
+            "quantile": 0.7066755473613711,
+            "n_calibration": 261,
+            "n_test": 21,
+            "coverage": 0.7619047619047619,
+            "exact": true
+          },
+          "5": {
+            "quantile": 0.677413180351266,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.45454545454545453,
+            "exact": true
+          },
+          "6": {
+            "quantile": 0.677413180351266,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.45454545454545453,
+            "exact": true
+          },
+          "7": {
+            "quantile": 0.677413180351266,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.45454545454545453,
+            "exact": true
+          },
+          "8": {
+            "quantile": 0.6627460360527095,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.36363636363636365,
+            "exact": true
+          },
+          "9": {
+            "quantile": 0.6856525874137844,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.5909090909090909,
+            "exact": true
+          },
+          "10": {
+            "quantile": 0.6190924482345679,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.045454545454545456,
+            "exact": true
+          },
+          "11": {
+            "quantile": 0.6856525874137844,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.5909090909090909,
+            "exact": true
+          },
+          "12": {
+            "quantile": 0.7036176795959506,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6818181818181818,
+            "exact": true
+          },
+          "13": {
+            "quantile": 0.7153865451812607,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.7727272727272727,
+            "exact": true
+          }
+        }
+      },
+      "era_0": {
+        "pooled_coverage": 0.49818181818181817,
+        "reference_quantile_seconds": 0.48063713395595187,
+        "reference_quantile_exact": true,
+        "n_calibration": 275,
+        "per_fold": [
+          {
+            "fold": 0,
+            "quantile": 0.4887456903457661,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.5454545454545454,
+            "exact": true
+          },
+          {
+            "fold": 1,
+            "quantile": 0.4863761472702066,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.5272727272727272,
+            "exact": true
+          },
+          {
+            "fold": 2,
+            "quantile": 0.4780725169181892,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.45454545454545453,
+            "exact": true
+          },
+          {
+            "fold": 3,
+            "quantile": 0.4734281055927312,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.43636363636363634,
+            "exact": true
+          },
+          {
+            "fold": 4,
+            "quantile": 0.4863761472702066,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.5272727272727272,
+            "exact": true
+          }
+        ]
+      }
+    },
+    "0.32": {
+      "coverage_target_pct": 68,
+      "era_1": {
+        "pooled_coverage": 0.6879432624113475,
+        "deployment_quantile_seconds": 0.947349971055985,
+        "deployment_quantile_exact": true,
+        "n_calibration": 282,
+        "per_round": {
+          "1": {
+            "quantile": 0.9594817247390637,
+            "n_calibration": 263,
+            "n_test": 19,
+            "coverage": 0.7894736842105263,
+            "exact": true
+          },
+          "2": {
+            "quantile": 0.8926177072524979,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.22727272727272727,
+            "exact": true
+          },
+          "3": {
+            "quantile": 0.9596200275421154,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.8181818181818182,
+            "exact": true
+          },
+          "4": {
+            "quantile": 0.9594817247390637,
+            "n_calibration": 261,
+            "n_test": 21,
+            "coverage": 0.7619047619047619,
+            "exact": true
+          },
+          "5": {
+            "quantile": 0.9819045977592396,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "6": {
+            "quantile": 0.947349971055985,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6818181818181818,
+            "exact": true
+          },
+          "7": {
+            "quantile": 0.9594817247390637,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.7727272727272727,
+            "exact": true
+          },
+          "8": {
+            "quantile": 0.933259635925296,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6363636363636364,
+            "exact": true
+          },
+          "9": {
+            "quantile": 0.9594817247390637,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.7727272727272727,
+            "exact": true
+          },
+          "10": {
+            "quantile": 0.8863909811973656,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.09090909090909091,
+            "exact": true
+          },
+          "11": {
+            "quantile": 0.9594817247390637,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.7727272727272727,
+            "exact": true
+          },
+          "12": {
+            "quantile": 0.9819045977592396,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "13": {
+            "quantile": 0.9596200275421154,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.8181818181818182,
+            "exact": true
+          }
+        }
+      },
+      "era_0": {
+        "pooled_coverage": 0.6909090909090909,
+        "reference_quantile_seconds": 0.7119082434177386,
+        "reference_quantile_exact": true,
+        "n_calibration": 275,
+        "per_fold": [
+          {
+            "fold": 0,
+            "quantile": 0.7565981945991496,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.7454545454545455,
+            "exact": true
+          },
+          {
+            "fold": 1,
+            "quantile": 0.7480155146121916,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.7272727272727273,
+            "exact": true
+          },
+          {
+            "fold": 2,
+            "quantile": 0.7119082434177386,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.6727272727272727,
+            "exact": true
+          },
+          {
+            "fold": 3,
+            "quantile": 0.7157434990405989,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.6909090909090909,
+            "exact": true
+          },
+          {
+            "fold": 4,
+            "quantile": 0.6988397228717815,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.6181818181818182,
+            "exact": true
+          }
+        ]
+      }
+    },
+    "0.2": {
+      "coverage_target_pct": 80,
+      "era_1": {
+        "pooled_coverage": 0.7943262411347518,
+        "deployment_quantile_seconds": 1.2504895458221483,
+        "deployment_quantile_exact": true,
+        "n_calibration": 282,
+        "per_round": {
+          "1": {
+            "quantile": 1.2803681011199899,
+            "n_calibration": 263,
+            "n_test": 19,
+            "coverage": 0.8947368421052632,
+            "exact": true
+          },
+          "2": {
+            "quantile": 1.1838499026298592,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.5,
+            "exact": true
+          },
+          "3": {
+            "quantile": 1.2803681011199899,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "4": {
+            "quantile": 1.2803681011199899,
+            "n_calibration": 261,
+            "n_test": 21,
+            "coverage": 0.9047619047619048,
+            "exact": true
+          },
+          "5": {
+            "quantile": 1.2978558754920897,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 1.0,
+            "exact": true
+          },
+          "6": {
+            "quantile": 1.2373925818801013,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6818181818181818,
+            "exact": true
+          },
+          "7": {
+            "quantile": 1.2803681011199899,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "8": {
+            "quantile": 1.2803681011199899,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "9": {
+            "quantile": 1.2504895458221483,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.8181818181818182,
+            "exact": true
+          },
+          "10": {
+            "quantile": 1.1044737052917526,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.13636363636363635,
+            "exact": true
+          },
+          "11": {
+            "quantile": 1.247812015533441,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.7727272727272727,
+            "exact": true
+          },
+          "12": {
+            "quantile": 1.2849578523635756,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9545454545454546,
+            "exact": true
+          },
+          "13": {
+            "quantile": 1.2849578523635756,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9545454545454546,
+            "exact": true
+          }
+        }
+      },
+      "era_0": {
+        "pooled_coverage": 0.8,
+        "reference_quantile_seconds": 0.979166886091221,
+        "reference_quantile_exact": true,
+        "n_calibration": 275,
+        "per_fold": [
+          {
+            "fold": 0,
+            "quantile": 0.9840966205596828,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.8181818181818182,
+            "exact": true
+          },
+          {
+            "fold": 1,
+            "quantile": 0.9840966205596828,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.8181818181818182,
+            "exact": true
+          },
+          {
+            "fold": 2,
+            "quantile": 1.0216147968769036,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.8909090909090909,
+            "exact": true
+          },
+          {
+            "fold": 3,
+            "quantile": 0.9574004495143953,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.7818181818181819,
+            "exact": true
+          },
+          {
+            "fold": 4,
+            "quantile": 0.9103468350172079,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.6909090909090909,
+            "exact": true
+          }
+        ]
+      }
+    },
+    "0.1": {
+      "coverage_target_pct": 90,
+      "era_1": {
+        "pooled_coverage": 0.8900709219858156,
+        "deployment_quantile_seconds": 1.70139538383485,
+        "deployment_quantile_exact": true,
+        "n_calibration": 282,
+        "per_round": {
+          "1": {
+            "quantile": 1.7061592607498142,
+            "n_calibration": 263,
+            "n_test": 19,
+            "coverage": 0.9473684210526315,
+            "exact": true
+          },
+          "2": {
+            "quantile": 1.5612227087020898,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.6363636363636364,
+            "exact": true
+          },
+          "3": {
+            "quantile": 1.7061592607498142,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9545454545454546,
+            "exact": true
+          },
+          "4": {
+            "quantile": 1.70139538383485,
+            "n_calibration": 261,
+            "n_test": 21,
+            "coverage": 0.9047619047619048,
+            "exact": true
+          },
+          "5": {
+            "quantile": 1.7167895951271106,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 1.0,
+            "exact": true
+          },
+          "6": {
+            "quantile": 1.70139538383485,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "7": {
+            "quantile": 1.7167895951271106,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 1.0,
+            "exact": true
+          },
+          "8": {
+            "quantile": 1.70139538383485,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          "9": {
+            "quantile": 1.7061592607498142,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9545454545454546,
+            "exact": true
+          },
+          "10": {
+            "quantile": 1.4534539165496767,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.4090909090909091,
+            "exact": true
+          },
+          "11": {
+            "quantile": 1.7061592607498142,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 0.9545454545454546,
+            "exact": true
+          },
+          "12": {
+            "quantile": 1.7167895951271106,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 1.0,
+            "exact": true
+          },
+          "13": {
+            "quantile": 1.7167895951271106,
+            "n_calibration": 260,
+            "n_test": 22,
+            "coverage": 1.0,
+            "exact": true
+          }
+        }
+      },
+      "era_0": {
+        "pooled_coverage": 0.9018181818181819,
+        "reference_quantile_seconds": 2.5385935153961157,
+        "reference_quantile_exact": true,
+        "n_calibration": 275,
+        "per_fold": [
+          {
+            "fold": 0,
+            "quantile": 2.6011369099616957,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.9272727272727272,
+            "exact": true
+          },
+          {
+            "fold": 1,
+            "quantile": 2.5385935153961157,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.9090909090909091,
+            "exact": true
+          },
+          {
+            "fold": 2,
+            "quantile": 2.5078005475997855,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.8909090909090909,
+            "exact": true
+          },
+          {
+            "fold": 3,
+            "quantile": 2.6011369099616957,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.9272727272727272,
+            "exact": true
+          },
+          {
+            "fold": 4,
+            "quantile": 2.151613976478572,
+            "n_calibration": 220,
+            "n_test": 55,
+            "coverage": 0.8545454545454545,
+            "exact": true
+          }
+        ]
+      }
+    }
+  }
+}

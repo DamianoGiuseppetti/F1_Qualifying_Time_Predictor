@@ -1,0 +1,31 @@
+# Not copied into the image (predict.py/train scripts read models/ and
+# data/processed/ via the docker-compose volume mounts instead), but still
+# worth excluding from the build CONTEXT sent to the Docker daemon -
+# data/raw alone is 302 parquet files, .venv and notebooks are large and
+# irrelevant to the image either way.
+.venv
+.venv_F1
+__pycache__
+*.pyc
+.pytest_cache
+notebooks/
+data/raw/
+data/processed/
+models/
+tests/
+.git
+.gitignore
+.vscode
+.claude
+*.egg-info
+build/
+docs/
+
+# Aug 30 2026 React rebuild: never send these to the Docker daemon as
+# part of the build context - frontend-build's own `npm install` inside
+# the image is what actually matters, and node_modules/dist here are
+# either absent (fresh checkout) or stale artifacts from Damiano running
+# `npm run build`/`npm run dev` locally to preview a change before a
+# rebuild.
+frontend/node_modules
+frontend/dist

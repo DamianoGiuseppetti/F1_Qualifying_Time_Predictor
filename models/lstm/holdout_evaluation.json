@@ -1,0 +1,14 @@
+{
+  "n_drivers_scored": 22,
+  "n_drivers_missing_target": 0,
+  "mape_pct": 0.5166327454715699,
+  "r2": 0.8245790947846834,
+  "interval_level_pct": 50.0,
+  "interval_empirical_coverage_pct": 95.45454545454545,
+  "year": 2026,
+  "round_number": 12,
+  "event": "Zandvoort (Dutch GP, \"Olanda\") - offline validation",
+  "production_model_trained_at_utc": "2026-08-24T21:23:34.716952+00:00",
+  "production_model_n_train": 1602,
+  "reference_leave_one_round_out_pooled_mape": 1.0526756791344665
+}

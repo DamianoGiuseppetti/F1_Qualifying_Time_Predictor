@@ -1,0 +1,12 @@
+{
+  "trained_at_utc": "2026-08-24T20:00:50.711129+00:00",
+  "n_train": 1602,
+  "n_epochs": 8,
+  "final_train_loss": 1.0267984861364732,
+  "total_seconds": 0.25575941600254737,
+  "target": "gap_final (reconstructed to final_quali_time via + practice_reference)",
+  "reference_leave_one_round_out_pooled_mape": 1.053,
+  "reference_leave_one_round_out_pooled_r2": 0.989,
+  "reference_xgboost_loro_pooled_mape": 1.153,
+  "note": "No fresh held-out metric exists for this specific model by design (trained on all non-holdout data, no val split). Trust the reference LORO numbers above for what to expect on an unseen round; Zandvoort (Phase 5) is the next real test of this exact artifact."
+}

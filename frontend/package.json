@@ -1,0 +1,20 @@
+{
+  "name": "f1qp-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "F1 Qualifying Predictor frontend - React + Vite (Aug 30 2026 rebuild, replacing the Aug 26 2026 plain HTML/CSS/vanilla-JS frontend - Damiano's own choice via AskUserQuestion). Builds to dist/, served by the FastAPI api service itself (see src/f1qp/api/main.py's static-mount comment) - no separate container, no dev server in production.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.10"
+  }
+}

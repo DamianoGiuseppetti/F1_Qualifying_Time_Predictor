@@ -1,0 +1,101 @@
+# Phase 4: run the FastAPI inference service in a container.
+#
+# models/ and data/processed/ are mounted read-only from the host, not
+# baked into the image - see Dockerfile's own note. This means: after
+# running `python scripts/retrain_pipeline.py` on the host (the manual
+# retrain step - Aug 24 2026 decision), `docker compose restart api`
+# picks up the new production model. No rebuild needed unless the CODE
+# changed.
+#
+# Host port defaults to 8000. If that's taken (as it apparently was
+# locally - Aug 24 2026 testing used 8001 instead), change the left side
+# of "8000:8000" below; the container's own internal port stays 8000
+# either way.
+#
+# Phase 5 addition (Aug 25 2026, RETIRED Aug 26 2026): there used to be a
+# `dashboard` service here (Streamlit, calling `api` over the compose
+# network + reading ./mlruns read-only). It's gone - see the Aug 26 2026
+# pivot note below. Dockerfile.dashboard and dashboard/app.py (the
+# retired app itself) were deleted Aug 30 2026 (storage cleanup);
+# dashboard/team_colors.py and dashboard/formatting.py stay - they are
+# NOT the retired app, they're the dependency-free source-of-truth
+# modules frontend/src/teamColors.js and frontend/src/format.js were
+# ported from (see those files' own docstrings; the frontend itself was
+# rebuilt again in React on Aug 30 2026, keeping the same two ported
+# files, just moved under frontend/src/), still imported directly by
+# tests/test_dashboard_team_colors.py and tests/test_dashboard_formatting.py.
+#
+# Aug 26 2026 pivot: Streamlit's CSS hooks couldn't match the approved
+# Design canvas mockup (see dashboard/app.py's own docstring and
+# Task_List.txt), so the dashboard was replaced with a hand-built static
+# frontend served by the `api` service itself via FastAPI's StaticFiles
+# (see main.py's static-mount comment) - same origin as the API, no
+# separate container, no CORS, no "FastAPI base URL" field to configure.
+# Browse to http://localhost:8000/ (not :8501 anymore) after
+# `docker compose up --build`.
+#
+# Aug 30 2026: that frontend was rebuilt again, this time in React
+# (Damiano's own choice via AskUserQuestion) - see Dockerfile's own
+# frontend-build stage and Task_List.txt. `docker compose build --no-cache`
+# (or `up --build`) is still the only command needed; the Node build now
+# happens inside the image, nothing extra to install on the host.
+#
+# Phase 5 UI redesign addition (Aug 26 2026): `./data/predictions` is
+# mounted READ-WRITE (unlike models/ and data/processed, both read-only) -
+# f1qp.serving.history persists every launched prediction there as one
+# JSON file per (year, round_number), and needs to actually write, not
+# just read. This is real, non-regenerable data (what the model actually
+# predicted at launch time, before quali happened) - unlike mlruns/, it is
+# NOT meant to be wiped and rebuilt.
+
+services:
+  api:
+    build: .
+    image: f1-qualifying-predictor-api:latest
+    ports:
+      - "8000:8000"
+    environment:
+      F1QP_MODELS_DIR: /app/models/lstm
+      F1QP_FEATURES_PATH: /app/data/processed/features.parquet
+      F1QP_TARGETS_PATH: /app/data/processed/qualifying_targets.parquet
+      F1QP_PREDICTIONS_DIR: /app/data/predictions/launches
+      # Added Aug 26 2026 pivot: GET /model/runs (Performance tab's
+      # retrain-history timeline) reads this MLflow tracking store -
+      # same mount the retired dashboard service used to have.
+      F1QP_MLRUNS_DIR: /app/mlruns
+      # Sep 16 2026 fix (see the Dockerfile's own matching comment):
+      # f1qp.serving.data_fetch's REPO_ROOT falls back to a
+      # __file__-parents guess that's wrong under this image's normal
+      # `pip install .` (lands in site-packages, not /app) - this makes it
+      # explicit instead, matching where the Dockerfile now COPYs scripts/.
+      F1QP_REPO_ROOT: /app
+      # Sep 13 2026 addition (point 4 of the "final version of the
+      # application" plan): unset here on purpose - local docker-compose
+      # is single-user by nature (only Damiano can reach localhost), so
+      # f1qp.api.main.require_admin stays a no-op and Launch/data-fetch
+      # keep working with zero friction, exactly as before this existed.
+      # Uncomment to test the gated behavior locally (the frontend's
+      # Settings panel will appear once this is set):
+      # ADMIN_TOKEN: change-me
+      # Sep 13 2026 addition, same day (the storage half of the "final
+      # version" plan - Damiano: "storage should be into hugging face
+      # without be in my local storage anymore"): also unset here on
+      # purpose - local docker-compose already has real, durable local
+      # storage (the ./data/predictions:rw mount below), so it has no
+      # need to mirror anything out to Hugging Face. f1qp.serving.hf_sync
+      # is a no-op with these unset - zero behavior change. Only the
+      # Space (see deploy/huggingface/SETUP.md) sets both:
+      # HF_DATASET_REPO: your-username/f1qp-space-data
+      # HF_TOKEN: change-me
+    volumes:
+      - ./models:/app/models:ro
+      - ./data/processed:/app/data/processed:ro
+      - ./data/predictions:/app/data/predictions:rw
+      - ./mlruns:/app/mlruns:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

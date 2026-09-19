@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f1-qualifying-predictor"
+version = "0.1.0"
+description = "LSTM qualifying-time predictor for the 2026 F1 season"
+requires-python = ">=3.10"
+dependencies = [
+    "fastf1>=3.3",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "pyarrow>=14.0",
+    "shap>=0.44",
+    "torch>=2.2",
+    "xgboost>=2.0",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "httpx2>=2.0",
+    "mlflow>=2.14",
+    "huggingface_hub>=0.24",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "scripts"]  # "scripts" added Sep 13 2026 so tests/test_build_features_merge.py and tests/test_extract_qualifying_targets_incremental.py can import build_features.py / extract_qualifying_targets.py directly. "dashboard" removed Sep 19 2026 (Phase 6 curation) - dashboard/ (and its two direct-import tests) dropped now that frontend/ is fully self-contained.
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 110
+# This is the FIRST time a linter has ever been pointed at this codebase
+# (Phase 4, Aug 24 2026) - deliberately starting with a lenient rule set
+# (pyflakes + pycodestyle errors only, not the full default set) rather
+# than every rule ruff knows about, since a stricter set turned on for the
+# first time against ~3 phases of already-written code would likely surface
+# a wall of style nitpicks unrelated to real bugs. Tighten this later if
+# useful - E/F already catches the things worth catching (unused imports,
+# undefined names, obvious syntax-level mistakes).
+exclude = ["notebooks", "build", "data", ".venv", "models", "*.egg-info"]
+
+[tool.ruff.lint]
+select = ["E", "F"]

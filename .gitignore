@@ -1,0 +1,53 @@
+# data (large, regenerable via scripts/)
+data/cache/*
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+build/
+.pytest_cache/
+
+# mlops (Phase 3+)
+mlruns/
+
+# launched-prediction history (Phase 5 UI redesign, Aug 26 2026) - real
+# generated state (f1qp.serving.history), not source data, same reasoning
+# as mlruns/ above. Lives under a docker-compose read-write volume mount
+# on the host, not baked into any image.
+data/predictions/
+
+# end-of-phase result-check notebooks (Aug 24 2026 convention) - built to
+# review real results interactively, never meant to ship in the repo
+notebooks/
+
+# Aug 30 2026 React rebuild: frontend/dist is a build artifact (from
+# `npm run build` / the Dockerfile's frontend-build stage), not source -
+# frontend/src/*.jsx is what's tracked.
+frontend/node_modules/
+frontend/dist/
+
+# misc
+.DS_Store
+.ipynb_checkpoints/
+.env
+
+# Phase 6 curation (Sep 19 2026): Cowork/Claude Code's own internal
+# tooling config, never meant to be part of the public project.
+.agents/
+.claude/
+
+# Retrain artifacts that grow forever if committed - both regenerable
+# (history/ is retrain_pipeline.py's own archive-on-promote, staged/ is
+# a fresh retrain's not-yet-promoted candidate). Only the live,
+# currently-promoted models/lstm/*.pt and siblings stay tracked.
+models/lstm/history/
+models/lstm/staged/
+
+# Phase 6 curation (Sep 19 2026): personal editor config, not project source.
+.vscode/

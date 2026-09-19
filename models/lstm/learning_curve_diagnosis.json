@@ -1,0 +1,12 @@
+{
+  "best_epoch": 8,
+  "final_epoch": 33,
+  "best_val_mape": 1.4449541880589607,
+  "train_loss_at_best_epoch": 1.1214152787412917,
+  "train_loss_at_final_epoch": 0.7654020658561161,
+  "train_loss_kept_falling_after_best": true,
+  "val_mape_worst_after_best": 1.6589205126724005,
+  "val_mape_drift_after_best": 0.21396632461343978,
+  "epochs_trained_past_best": 25,
+  "overfitting_signature": true
+}

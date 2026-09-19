@@ -1,0 +1,9 @@
+# space_build/ is regenerated from scratch by sync_and_push.sh every run -
+# never edited by hand, never meant to be committed to the main repo (it's
+# its own separate git repo, pushed straight to the Hugging Face Space).
+space_build/
+
+# Your actual Space's git URL - personal, and not needed by anyone
+# replicating this project from GitHub. Copy space_remote.txt.example to
+# space_remote.txt and fill in your own (see SETUP.md).
+space_remote.txt

@@ -1,0 +1,12 @@
+{
+  "trained_at_utc": "2026-09-13T11:00:29.997141+00:00",
+  "n_train": 1646,
+  "n_epochs": 9,
+  "final_train_loss": 0.9959775805473328,
+  "total_seconds": 0.20515041699400172,
+  "target": "gap_final (reconstructed to final_quali_time via + practice_reference)",
+  "reference_leave_one_round_out_pooled_mape": 0.944307875072187,
+  "reference_leave_one_round_out_pooled_r2": 0.9899624385145717,
+  "trained_with_holdout": true,
+  "note": "No fresh held-out metric exists for this specific model by design (trained on all non-holdout data, no val split). Trust the leave-one-round-out pooled numbers above - freshly recomputed by THIS pipeline run against the current dataset, not carried over from an earlier run."
+}
