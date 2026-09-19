@@ -58,9 +58,11 @@ def test_assemble_dataset_join_and_masks(features_df, targets_df):
     assert matching["Q1"].nunique() == 1  # same target repeated across sessions
 
     # Masks: driver index 0 (VER) reaches Q1/Q2/Q3, index 2 (LEC) only Q1.
-    lec_row = merged[(merged["Year"] == 2023) & (merged["RoundNumber"] == 1) & (merged["Driver"] == "LEC")].iloc[0]
+    lec_mask = (merged["Year"] == 2023) & (merged["RoundNumber"] == 1) & (merged["Driver"] == "LEC")
+    lec_row = merged[lec_mask].iloc[0]
     assert lec_row["has_Q1"] and not lec_row["has_Q2"] and not lec_row["has_Q3"]
-    ver_row = merged[(merged["Year"] == 2023) & (merged["RoundNumber"] == 1) & (merged["Driver"] == "VER")].iloc[0]
+    ver_mask = (merged["Year"] == 2023) & (merged["RoundNumber"] == 1) & (merged["Driver"] == "VER")
+    ver_row = merged[ver_mask].iloc[0]
     assert ver_row["has_Q1"] and ver_row["has_Q2"] and ver_row["has_Q3"]
 
 

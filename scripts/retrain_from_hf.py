@@ -140,7 +140,10 @@ def _retrain() -> None:
 def _staged_paths_in_repo() -> List[str]:
     staged = latest_staged(MODELS_DIR)
     if staged is None:
-        print("No staged candidate found after retrain_pipeline.py ran - something went wrong upstream.", flush=True)
+        print(
+            "No staged candidate found after retrain_pipeline.py ran - something went wrong upstream.",
+            flush=True,
+        )
         raise SystemExit(1)
     stamp = staged["timestamp"]
     paths = [f"models/lstm/staged/{stamp}/{name}" for name in (*ARTIFACT_NAMES, "staged_meta.json")]
@@ -182,7 +185,10 @@ def _verify_pushed(expected_staged_paths: List[str]) -> bool:
     if not mlflow_db_present:
         print("mlruns/mlflow.db not found on Hugging Face after push.", flush=True)
         return False
-    print("All staged-candidate files and the MLflow store are confirmed present on Hugging Face.", flush=True)
+    print(
+        "All staged-candidate files and the MLflow store are confirmed present on Hugging Face.",
+        flush=True,
+    )
     return True
 
 

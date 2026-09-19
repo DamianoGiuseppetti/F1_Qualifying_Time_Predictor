@@ -46,7 +46,6 @@ import numpy as np
 import pandas as pd
 import torch
 
-from f1qp.modeling.baseline import mape, r_squared
 from f1qp.modeling.dataset import pivot_to_weekend_features, resolve_feature_columns
 from f1qp.modeling.lstm_model import train_lstm
 from f1qp.modeling.sequences import FeatureImputer, FeatureScaler, build_lstm_sequences
@@ -128,7 +127,7 @@ def main() -> None:
     # detail (era breakdown, comparison to baseline) it doesn't have.
 
     best_metrics = result.history[result.best_epoch - 1]
-    print(f"\nEra-stratified at best epoch:")
+    print("\nEra-stratified at best epoch:")
     for era_value in sorted(best_metrics.val_mape_by_era):
         print(f"  era={era_value}: MAPE={best_metrics.val_mape_by_era[era_value]:.3f}%  "
               f"R2={best_metrics.val_r2_by_era[era_value]:.3f}")

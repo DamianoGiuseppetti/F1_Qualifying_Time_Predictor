@@ -141,7 +141,9 @@ def main() -> None:
             laps["Year"] = 2026
             laps["RoundNumber"] = round_number
             laps["IsSprint"] = event.is_sprint
-            report = validate_laps(laps, year=2026, round_number=round_number, session_code=loaded.session_code)
+            report = validate_laps(
+                laps, year=2026, round_number=round_number, session_code=loaded.session_code
+            )
             if not report.is_clean:
                 logger.warning(
                     "Schema issue R%s %s: missing=%s notes=%s",
@@ -153,7 +155,10 @@ def main() -> None:
         pd.concat(frames, ignore_index=True).to_parquet(out_path)
         logger.info("Saved %s", out_path)
 
-    logger.info("Done. %s sessions checked, %s with schema issues.", len(reports), sum(not r.is_clean for r in reports))
+    logger.info(
+        "Done. %s sessions checked, %s with schema issues.",
+        len(reports), sum(not r.is_clean for r in reports),
+    )
 
 
 if __name__ == "__main__":

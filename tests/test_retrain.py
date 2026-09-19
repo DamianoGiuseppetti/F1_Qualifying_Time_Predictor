@@ -50,7 +50,11 @@ def test_format_retrain_comparison_shows_both_values():
 
 
 def test_format_retrain_comparison_handles_missing_fields_gracefully():
-    previous = {"n_train": 1602, "pooled_mape": None, "pooled_r2": 0.989, "epoch_count": 8, "interval_50pct": 0.752}
-    current = {"n_train": 1624, "pooled_mape": 0.981, "pooled_r2": 0.991, "epoch_count": 7, "interval_50pct": 0.688}
+    previous = {
+        "n_train": 1602, "pooled_mape": None, "pooled_r2": 0.989, "epoch_count": 8, "interval_50pct": 0.752,
+    }
+    current = {
+        "n_train": 1624, "pooled_mape": 0.981, "pooled_r2": 0.991, "epoch_count": 7, "interval_50pct": 0.688,
+    }
     result = format_retrain_comparison(previous, current)
     assert "?" in result  # the missing previous pooled_mape shows as "?", not a crash

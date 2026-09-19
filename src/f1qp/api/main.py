@@ -505,8 +505,12 @@ def model_info() -> ModelInfoResponse:
         trained_at_utc=m.get("trained_at_utc", ""),
         n_train=m.get("n_train", 0),
         n_epochs=m.get("n_epochs", 0),
-        reference_leave_one_round_out_pooled_mape=m.get("reference_leave_one_round_out_pooled_mape", float("nan")),
-        reference_leave_one_round_out_pooled_r2=m.get("reference_leave_one_round_out_pooled_r2", float("nan")),
+        reference_leave_one_round_out_pooled_mape=m.get(
+            "reference_leave_one_round_out_pooled_mape", float("nan")
+        ),
+        reference_leave_one_round_out_pooled_r2=m.get(
+            "reference_leave_one_round_out_pooled_r2", float("nan")
+        ),
         deployment_quantile_seconds=a.deployment_quantile_seconds,
         deployment_quantile_exact=a.deployment_quantile_exact,
         interval_level_pct=a.coverage_target_pct,
@@ -572,7 +576,9 @@ def model_staged() -> StagedModelResponse:
         holdout_included=staged.get("holdout_included"),
         mlflow_run_id=staged.get("mlflow_run_id"),
         comparison_text=format_retrain_comparison(previous, current) if current else None,
-        comparison=[RetrainComparisonRow(key=r["key"], previous=r["previous"], current=r["current"]) for r in rows],
+        comparison=[
+            RetrainComparisonRow(key=r["key"], previous=r["previous"], current=r["current"]) for r in rows
+        ],
     )
 
 
@@ -751,7 +757,17 @@ def history_current() -> List[CurrentPredictionResponse]:
                 model_trained_at_utc=entry["model_trained_at_utc"],
                 excluded_test_drivers=entry["excluded_test_drivers"],
                 scored=entry["scored"],
-                rows=[HistoryRowResponse(**{**row, "year": entry["year"], "round_number": entry["round_number"], "launched_at_utc": entry["launched_at_utc"]}) for row in rows_clean],
+                rows=[
+                    HistoryRowResponse(
+                        **{
+                            **row,
+                            "year": entry["year"],
+                            "round_number": entry["round_number"],
+                            "launched_at_utc": entry["launched_at_utc"],
+                        }
+                    )
+                    for row in rows_clean
+                ],
             )
         )
     return out
@@ -783,7 +799,9 @@ def data_readiness(year: int, round_number: int) -> DataReadinessResponse:
 
 
 @app.post("/data/fetch/{year}/{round_number}", response_model=FetchJobStartedResponse)
-def data_fetch(year: int, round_number: int, _admin: None = Depends(require_admin)) -> FetchJobStartedResponse:
+def data_fetch(
+    year: int, round_number: int, _admin: None = Depends(require_admin)
+) -> FetchJobStartedResponse:
     """Kicks off download_2026.py --round + build_features.py --round in
     the background so Preview/Launch can find this round's data without
     a terminal. Poll the returned job_id via GET /data/jobs/{job_id}.

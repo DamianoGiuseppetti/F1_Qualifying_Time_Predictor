@@ -61,7 +61,11 @@ def _fake_artifacts() -> ProductionArtifacts:
 
 def _write_features_parquet(path, year=2099, round_number=13, include_test_driver=False):
     rows = []
-    best_lap_time = {"FP1": {"VER": 90.0, "HAM": 91.0}, "FP2": {"VER": 89.5, "HAM": 90.5}, "FP3": {"VER": 89.0, "HAM": 90.0}}
+    best_lap_time = {
+        "FP1": {"VER": 90.0, "HAM": 91.0},
+        "FP2": {"VER": 89.5, "HAM": 90.5},
+        "FP3": {"VER": 89.0, "HAM": 90.0},
+    }
     for session in ("FP1", "FP2", "FP3"):
         for driver in ("VER", "HAM"):
             rows.append({
@@ -100,7 +104,9 @@ def client(tmp_path, monkeypatch):
 
     launches_dir = tmp_path / "launches"
     targets_path = tmp_path / "qualifying_targets.parquet"
-    pd.DataFrame(columns=["Year", "RoundNumber", "Driver", "Q1", "Q2", "Q3"]).to_parquet(targets_path, index=False)
+    pd.DataFrame(columns=["Year", "RoundNumber", "Driver", "Q1", "Q2", "Q3"]).to_parquet(
+        targets_path, index=False
+    )
     monkeypatch.setattr(history_mod, "LAUNCHES_DIR", launches_dir)
     monkeypatch.setattr(history_mod, "TARGETS_PATH", targets_path)
 
@@ -178,7 +184,9 @@ def client_with_test_driver(tmp_path, monkeypatch):
 
     launches_dir = tmp_path / "launches"
     targets_path = tmp_path / "qualifying_targets.parquet"
-    pd.DataFrame(columns=["Year", "RoundNumber", "Driver", "Q1", "Q2", "Q3"]).to_parquet(targets_path, index=False)
+    pd.DataFrame(columns=["Year", "RoundNumber", "Driver", "Q1", "Q2", "Q3"]).to_parquet(
+        targets_path, index=False
+    )
     monkeypatch.setattr(history_mod, "LAUNCHES_DIR", launches_dir)
     monkeypatch.setattr(history_mod, "TARGETS_PATH", targets_path)
 

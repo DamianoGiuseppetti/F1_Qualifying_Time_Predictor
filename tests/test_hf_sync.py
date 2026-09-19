@@ -47,7 +47,9 @@ def _install_fake_hub(monkeypatch, snapshot_download=None, raise_on_upload=None)
     else:
         fake.HfApi = _FakeHfApi
 
-    fake.snapshot_download = snapshot_download or (lambda **kwargs: (_ for _ in ()).throw(RuntimeError("not used")))
+    fake.snapshot_download = snapshot_download or (
+        lambda **kwargs: (_ for _ in ()).throw(RuntimeError("not used"))
+    )
     monkeypatch.setitem(sys.modules, "huggingface_hub", fake)
     return fake
 

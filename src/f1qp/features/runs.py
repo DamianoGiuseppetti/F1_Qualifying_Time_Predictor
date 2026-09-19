@@ -36,7 +36,9 @@ DEFAULT_GAP_MULTIPLIER = 2.5
 # out-lap/in-lap pace alone.
 MIN_GAP_SECONDS = 90.0
 
-REQUIRED_COLUMNS = ["Driver", "LapNumber", "Stint", "LapTime", "LapStartTime", "PitInTime", "Deleted", "IsAccurate"]
+REQUIRED_COLUMNS = [
+    "Driver", "LapNumber", "Stint", "LapTime", "LapStartTime", "PitInTime", "Deleted", "IsAccurate",
+]
 
 
 def _session_median_lap_seconds(laps: pd.DataFrame) -> float:

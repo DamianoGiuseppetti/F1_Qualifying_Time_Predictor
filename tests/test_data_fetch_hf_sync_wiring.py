@@ -42,7 +42,9 @@ def test_start_fetch_job_pushes_features_parquet_on_success(tmp_path, monkeypatc
     monkeypatch.setenv("F1QP_FEATURES_PATH", str(features_path))
 
     calls = []
-    monkeypatch.setattr(data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo)))
+    monkeypatch.setattr(
+        data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo))
+    )
 
     job_id = start_fetch_job(2026, 13)
     job = _wait_for_job(job_id)
@@ -58,7 +60,9 @@ def test_start_results_job_pushes_qualifying_targets_parquet_on_success(tmp_path
     monkeypatch.setenv("F1QP_TARGETS_PATH", str(targets_path))
 
     calls = []
-    monkeypatch.setattr(data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo)))
+    monkeypatch.setattr(
+        data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo))
+    )
 
     job_id = start_results_job(2026, 13)
     job = _wait_for_job(job_id)
@@ -73,7 +77,9 @@ def test_on_success_is_never_called_when_a_step_fails(monkeypatch):
 
     monkeypatch.setattr(data_fetch_mod.subprocess, "run", _failing_run)
     calls = []
-    monkeypatch.setattr(data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo)))
+    monkeypatch.setattr(
+        data_fetch_mod.hf_sync, "push_file", lambda path, path_in_repo: calls.append((path, path_in_repo))
+    )
 
     job_id = start_fetch_job(2026, 13)
     job = _wait_for_job(job_id)

@@ -26,7 +26,9 @@ CORE_FEATURE_COLUMNS = [
     "compound_on_best_lap", "tyre_life_on_best_lap", "fuel_corrected_pace", "long_run_avg_pace",
     "best_sector1_time", "best_sector2_time", "best_sector3_time", "best_lap_session_position",
 ]
-WEATHER_FEATURE_COLUMNS = ["air_temp_mean", "track_temp_mean", "humidity_mean", "rainfall_share", "wind_speed_mean"]
+WEATHER_FEATURE_COLUMNS = [
+    "air_temp_mean", "track_temp_mean", "humidity_mean", "rainfall_share", "wind_speed_mean",
+]
 TELEMETRY_FEATURE_COLUMNS = ["throttle_full_pct", "throttle_mean", "braking_events", "avg_speed", "max_speed"]
 
 
@@ -75,10 +77,14 @@ def build_session_driver_features(
         # this is an approximate within-run position, not an exact replay of
         # the fit - fine for a correction that isn't claiming exact physical
         # fuel load in the first place (see f1qp.features.fuel docstring).
-        run_laps = flying[(flying["Driver"] == driver) & (flying["RunId"] == best["RunId"])].sort_values("LapNumber")
+        run_laps = flying[
+            (flying["Driver"] == driver) & (flying["RunId"] == best["RunId"])
+        ].sort_values("LapNumber")
         lap_in_run = int((run_laps["LapNumber"] <= best["LapNumber"]).sum())
 
-        longest_run_id = driver_runs.loc[driver_runs["n_laps"].idxmax(), "RunId"] if len(driver_runs) else None
+        longest_run_id = (
+            driver_runs.loc[driver_runs["n_laps"].idxmax(), "RunId"] if len(driver_runs) else None
+        )
         long_run_laps = flying[(flying["Driver"] == driver) & (flying["RunId"] == longest_run_id)]
 
         best_lap_position = (
@@ -145,7 +151,9 @@ def join_weather_features(features: pd.DataFrame, weather_row: dict | None) -> p
     return out
 
 
-def join_telemetry_features(features: pd.DataFrame, telemetry_by_driver_lap: pd.DataFrame | None) -> pd.DataFrame:
+def join_telemetry_features(
+    features: pd.DataFrame, telemetry_by_driver_lap: pd.DataFrame | None
+) -> pd.DataFrame:
     """Join telemetry trend features onto each driver's own best lap (`best_lap_number`).
 
     `telemetry_by_driver_lap` is the concatenated output of

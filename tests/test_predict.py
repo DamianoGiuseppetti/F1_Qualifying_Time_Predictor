@@ -63,7 +63,9 @@ def _zeroed_model(constant_pred: float = CONSTANT_GAP_PRED) -> QualifyingLSTM:
     return model
 
 
-def _identity_artifacts(constant_pred: float = CONSTANT_GAP_PRED, quantile: float = 0.5) -> ProductionArtifacts:
+def _identity_artifacts(
+    constant_pred: float = CONSTANT_GAP_PRED, quantile: float = 0.5
+) -> ProductionArtifacts:
     n = len(FEATURE_COLS)
     return ProductionArtifacts(
         model=_zeroed_model(constant_pred),

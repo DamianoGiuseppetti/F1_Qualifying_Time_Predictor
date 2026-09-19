@@ -149,8 +149,10 @@ def _run() -> None:
                         year, round_number, session_code,
                     )
                 else:
-                    logger.info("No raw laps on disk for %s R%s %s - skipping (re-run Phase 1 downloads first?)",
-                                year, round_number, session_code)
+                    logger.info(
+                        "No raw laps on disk for %s R%s %s - skipping (re-run Phase 1 downloads first?)",
+                        year, round_number, session_code,
+                    )
                 continue
 
             reps = representative_laps(add_run_features(laps))
@@ -183,7 +185,9 @@ def _run() -> None:
                 rate_limited = True
                 break
             except Exception as exc:
-                logger.warning("Telemetry session load failed %s R%s %s: %s", year, round_number, session_code, exc)
+                logger.warning(
+                    "Telemetry session load failed %s R%s %s: %s", year, round_number, session_code, exc
+                )
                 failures.append((year, round_number, session_code, "session load", str(exc)))
                 continue
 

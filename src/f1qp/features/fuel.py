@@ -97,8 +97,10 @@ class FuelBurnResult:
     n_sessions_used: int
     standard_error: float  # of seconds_per_lap; classical (non-clustered) - a lower bound on true uncertainty
     t_stat: float  # seconds_per_lap / standard_error
-    bootstrap_sign_consistency: float  # fraction of run-level bootstrap resamples agreeing with the point estimate's sign
-    is_reliable: bool  # True only if the sign is physically sensible AND both diagnostics clear their threshold
+    # fraction of run-level bootstrap resamples agreeing with the point estimate's sign
+    bootstrap_sign_consistency: float
+    # True only if the sign is physically sensible AND both diagnostics clear their threshold
+    is_reliable: bool
 
     @property
     def effective_seconds_per_lap(self) -> float:
@@ -130,7 +132,9 @@ def _regression_frame(laps_with_runs: pd.DataFrame, *, min_run_length: int) -> p
 
     df["lap_in_run"] = df.groupby(["Driver", "RunId"])["LapNumber"].rank(method="first")
     df["lap_time_seconds"] = df["LapTime"].dt.total_seconds()
-    df["compound_ord"] = df["Compound"].astype(str).str.upper().map(COMPOUND_ORDER).fillna(DEFAULT_COMPOUND_ORD)
+    df["compound_ord"] = (
+        df["Compound"].astype(str).str.upper().map(COMPOUND_ORDER).fillna(DEFAULT_COMPOUND_ORD)
+    )
     # Unique run id across sessions - the bootstrap resamples at this level, not per-lap,
     # because laps within one run are not independent observations.
     df["_run_key"] = list(zip(df["Year"], df["RoundNumber"], df["SessionCode"], df["Driver"], df["RunId"]))
@@ -233,7 +237,9 @@ def learn_fuel_burn_factor(
     seconds_per_lap = -beta
     t_stat = seconds_per_lap / se if se > 0 else 0.0
 
-    bootstrap_consistency = _bootstrap_sign_consistency(df, beta, n_bootstrap=n_bootstrap, seed=bootstrap_seed)
+    bootstrap_consistency = _bootstrap_sign_consistency(
+        df, beta, n_bootstrap=n_bootstrap, seed=bootstrap_seed
+    )
 
     is_reliable = (
         seconds_per_lap > 0

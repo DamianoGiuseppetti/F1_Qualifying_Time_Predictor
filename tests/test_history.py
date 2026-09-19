@@ -157,7 +157,12 @@ def test_latest_two_launches_orders_newest_first_and_caps_at_two(tmp_path):
     targets_path = tmp_path / "qualifying_targets.parquet"
     _write_targets(targets_path, [])
 
-    for round_number, ts in [(11, "2026-08-01T00:00:00+00:00"), (12, "2026-08-15T00:00:00+00:00"), (13, "2026-08-26T00:00:00+00:00")]:
+    launch_times = [
+        (11, "2026-08-01T00:00:00+00:00"),
+        (12, "2026-08-15T00:00:00+00:00"),
+        (13, "2026-08-26T00:00:00+00:00"),
+    ]
+    for round_number, ts in launch_times:
         record_launch(
             year=2026, round_number=round_number, predictions=[_pred("VER", 90.0, 89.5, 90.5)],
             excluded_test_drivers=[], model_trained_at_utc="t0", launched_at_utc=ts,
@@ -187,7 +192,9 @@ def test_prediction_history_filters_by_season_and_round(tmp_path):
     all_rows = prediction_history(launches_dir=launches_dir, targets_path=targets_path)
     assert set(all_rows["round_number"]) == {12, 13}
 
-    only_13 = prediction_history(season=2026, round_number=13, launches_dir=launches_dir, targets_path=targets_path)
+    only_13 = prediction_history(
+        season=2026, round_number=13, launches_dir=launches_dir, targets_path=targets_path
+    )
     assert set(only_13["round_number"]) == {13}
 
 

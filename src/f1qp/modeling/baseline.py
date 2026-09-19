@@ -239,7 +239,7 @@ def leave_one_round_out_cv(
     split == 'holdout' rows (Zandvoort) from ever entering training or
     testing here - that stays reserved for the Phase 5 offline test.
     """
-    year_col, round_col, era_col = fcols.year, fcols.round_number, fcols.era
+    round_col, era_col = fcols.round_number, fcols.era
 
     pool = wide_df[
         (wide_df["split"] != "holdout") & (wide_df[has_target_col].astype(bool))

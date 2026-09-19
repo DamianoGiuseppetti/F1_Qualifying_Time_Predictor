@@ -206,7 +206,10 @@ def main() -> None:
             flush=True,
         )
         for round_number, metrics in sorted(era1.per_round.items()):
-            warn = "" if metrics["exact"] else "  (WARNING: too few calibration residuals for an exact guarantee)"
+            warn = (
+                "" if metrics["exact"]
+                else "  (WARNING: too few calibration residuals for an exact guarantee)"
+            )
             print(
                 f"  round={round_number:>3}  q=+/-{metrics['quantile']:.3f}s  "
                 f"n_test={metrics['n_test']:2d}  coverage={metrics['coverage'] * 100:5.1f}%{warn}",

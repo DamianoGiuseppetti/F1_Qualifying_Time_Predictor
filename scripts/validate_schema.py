@@ -108,7 +108,8 @@ def main() -> None:
 
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text("\n".join(lines) + "\n")
-    print(f"Wrote {REPORT_PATH} - {flagged}/{len(sessions)} sessions flagged across {sessions['file'].nunique()} files.")
+    n_files = sessions["file"].nunique()
+    print(f"Wrote {REPORT_PATH} - {flagged}/{len(sessions)} sessions flagged across {n_files} files.")
 
 
 if __name__ == "__main__":

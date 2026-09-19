@@ -270,7 +270,9 @@ def main() -> None:
 
         for session_code in event.practice_sessions:
             session_laps = laps[laps["SessionCode"] == session_code]
-            feats = build_session_driver_features(session_laps, fuel_burn_seconds_per_lap=fuel_burn_seconds_per_lap)
+            feats = build_session_driver_features(
+                session_laps, fuel_burn_seconds_per_lap=fuel_burn_seconds_per_lap
+            )
             if feats.empty:
                 continue
 
@@ -304,7 +306,11 @@ def main() -> None:
     if not all_rows and (existing_df is None or existing_df.empty):
         raise RuntimeError("Produced zero feature rows - check data/raw/ has downloaded files.")
 
-    rebuilt = pd.concat(all_rows, ignore_index=True) if all_rows else pd.DataFrame(columns=(existing_df.columns if existing_df is not None else None))
+    rebuilt = (
+        pd.concat(all_rows, ignore_index=True)
+        if all_rows
+        else pd.DataFrame(columns=(existing_df.columns if existing_df is not None else None))
+    )
     out = _carry_forward_missing(rebuilt, existing_df)
     out.to_parquet(OUT_PATH)
     logger.info("Wrote %s - %s (driver, session) rows across %s weekends (%s rows freshly rebuilt this run).",

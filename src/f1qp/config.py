@@ -158,7 +158,9 @@ def session_readiness(year: int, round_number: int) -> dict:
             return {
                 "ready": True,
                 "checked": False,
-                "message": "No scheduled session time found for this round - proceeding without a readiness check.",
+                "message": (
+                    "No scheduled session time found for this round - proceeding without a readiness check."
+                ),
             }
         start_utc = pd.Timestamp(start_raw)
         if start_utc.tzinfo is None:

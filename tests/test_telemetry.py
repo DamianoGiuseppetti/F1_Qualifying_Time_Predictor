@@ -49,7 +49,9 @@ def test_telemetry_trend_features_raises_on_empty_frame():
 
 def test_telemetry_row_for_lap_includes_join_keys():
     tel = _telemetry(throttle=[100.0] * 5, brake=[False] * 5, speed=[300.0] * 5)
-    row = telemetry_row_for_lap(tel, year=2026, round_number=10, session_code="FP2", driver="VER", lap_number=14.0)
+    row = telemetry_row_for_lap(
+        tel, year=2026, round_number=10, session_code="FP2", driver="VER", lap_number=14.0
+    )
     assert row["Year"] == 2026
     assert row["Driver"] == "VER"
     assert row["LapNumber"] == 14.0

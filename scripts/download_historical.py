@@ -101,7 +101,10 @@ def _download_one_round(year: int, round_number: int, rate_limited: threading.Ev
                 year, round_number, event.event_name,
             )
             return RoundResult(year, round_number, event.event_name, "rate_limited", str(exc))
-        logger.exception("Giving up on %s R%s (%s) for now - will retry next run", year, round_number, event.event_name)
+        logger.exception(
+            "Giving up on %s R%s (%s) for now - will retry next run",
+            year, round_number, event.event_name,
+        )
         return RoundResult(year, round_number, event.event_name, "failed", str(exc))
 
     frames = []
@@ -148,7 +151,9 @@ def main() -> None:
                     rate_limited.set()
                     result = RoundResult(year, round_number, None, "rate_limited", str(exc))
                 else:
-                    logger.exception("Unexpected error downloading %s R%s - will retry next run", year, round_number)
+                    logger.exception(
+                        "Unexpected error downloading %s R%s - will retry next run", year, round_number
+                    )
                     result = RoundResult(year, round_number, None, "failed", str(exc))
             results.append(result)
             logger.info("[%s/%s] %s R%s: %s", i, len(events), year, round_number, result.status)
@@ -165,7 +170,9 @@ def main() -> None:
 
     if failed:
         failed_sorted = sorted(failed, key=lambda r: (r.year, r.round_number))
-        logger.warning("Failed to download %s weekend(s) - rerun this script to retry just these:", len(failed))
+        logger.warning(
+            "Failed to download %s weekend(s) - rerun this script to retry just these:", len(failed)
+        )
         for r in failed_sorted:
             label = r.event_name or "unknown event"
             logger.warning("  - %s R%02d (%s): %s", r.year, r.round_number, label, r.error)
@@ -174,7 +181,8 @@ def main() -> None:
         rl_sorted = sorted(rate_limited_rounds, key=lambda r: (r.year, r.round_number))
         logger.warning(
             "Skipped %s weekend(s) due to FastF1's API rate limit (500 calls/h) - "
-            "wait for the window to drain (up to ~1h from your last burst of calls) and re-run to pick these up:",
+            "wait for the window to drain (up to ~1h from your last burst of calls) "
+            "and re-run to pick these up:",
             len(rate_limited_rounds),
         )
         for r in rl_sorted:

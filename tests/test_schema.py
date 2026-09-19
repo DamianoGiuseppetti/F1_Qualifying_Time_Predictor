@@ -22,7 +22,6 @@ def test_validate_laps_clean_frame():
 
 
 def test_validate_laps_flags_thin_qualifying_field():
-    cols = ["Driver", "LapTime"]
     df = pd.DataFrame({"Driver": [f"D{i}" for i in range(8)], "LapTime": [1] * 8})
     report = validate_laps(df, year=2026, round_number=12, session_code="Q")
     assert any("red flag" in n for n in report.notes)

@@ -19,7 +19,9 @@ def _laps_from_rows(rows: list[dict]) -> pd.DataFrame:
     return df
 
 
-def _synthetic_single_session_long_runs(n_runs: int = 8, laps_per_run: int = 10, seed: int = 0) -> pd.DataFrame:
+def _synthetic_single_session_long_runs(
+    n_runs: int = 8, laps_per_run: int = 10, seed: int = 0
+) -> pd.DataFrame:
     """Laps shaped like real green-flag long runs, all from ONE session, with a KNOWN
     fuel effect baked in. With only one session there's nothing for session-level
     fixed effects to remove - this is the direct analogue of the original
@@ -140,7 +142,9 @@ def test_learn_fuel_burn_factor_session_fixed_effects_survive_a_real_confound():
     laps = _synthetic_two_session_confound()
 
     naive_estimate = _naive_pooled_fit(laps)
-    assert naive_estimate < 0, "sanity check on the test data itself: the confound should fool a single-intercept fit"
+    assert naive_estimate < 0, (
+        "sanity check on the test data itself: the confound should fool a single-intercept fit"
+    )
 
     result = learn_fuel_burn_factor(laps, n_bootstrap=200, bootstrap_seed=0)
     assert result.seconds_per_lap == pytest.approx(TRUE_FUEL_SECONDS_PER_LAP, abs=0.03)

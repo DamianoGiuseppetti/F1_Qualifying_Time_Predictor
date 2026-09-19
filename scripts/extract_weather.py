@@ -52,14 +52,19 @@ def main() -> None:
                     )
                 )
             except Exception as exc:
-                logger.warning("Weather extraction failed %s R%s %s: %s", year, round_number, session_code, exc)
+                logger.warning(
+                    "Weather extraction failed %s R%s %s: %s", year, round_number, session_code, exc
+                )
                 failures.append((year, round_number, session_code, str(exc)))
 
     out = pd.DataFrame(rows)
     out.to_parquet(OUT_PATH)
     logger.info("Wrote %s - %s sessions, %s failures.", OUT_PATH, len(rows), len(failures))
     if failures:
-        logger.warning("Failed sessions (re-run this script to retry - it isn't idempotent-by-skip, it's fast enough to just redo):")
+        logger.warning(
+            "Failed sessions (re-run this script to retry - it isn't idempotent-by-skip, "
+            "it's fast enough to just redo):"
+        )
         for year, round_number, session_code, err in failures:
             logger.warning("  - %s R%s %s: %s", year, round_number, session_code, err)
 
